@@ -1,23 +1,23 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, Clock, ShoppingBag, Truck } from "lucide-react"
+import { ChevronRight, Utensils, ShoppingBag, Truck } from "lucide-react"
+import { AnimatedFoodTruck } from "./components/AnimatedFoodTruck"
 
 const FEATURED_DISHES = [
   {
     name: "Spicy Beef Brisket Soup",
     description: "Rich and hearty Korean-style beef soup",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/beef-EsM2Bs7x7Ijz5deQzXhwEcXovejyNP.png",
   },
   {
-    name: "Boiling Shrimp",
-    description: "Fresh shrimp in our signature spicy sauce",
-    image: "/placeholder.svg?height=400&width=600",
+    name: "Chicken 65 Biryani",
+    description: "Spicy chicken 65 with aromatic biryani rice",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chicken65-OIxKNVPUXjC9fK82mjFW0P9fKrM1NR.png",
   },
   {
     name: "Fusion Ramen",
     description: "Japanese ramen with a unique twist",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ramen-MSR0tfF6wk8I31nqETsfUmu3CVoAdA.png",
   },
 ]
 
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="flex flex-col bg-muted">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 bg-secondary">
+      <section className="relative pt-32 pb-16 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -43,24 +43,18 @@ export default function Home() {
                     <ChevronRight className="ml-2" />
                   </Button>
                 </Link>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
-                >
-                  View Menu
-                </Button>
+                <Link href="/menu">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
+                  >
+                    View Menu
+                  </Button>
+                </Link>
               </div>
             </div>
-            <div className="relative h-[400px]">
-              <div className="absolute inset-0 bg-primary rounded-full opacity-20" />
-              <Image
-                src="/placeholder.svg?height=400&width=400"
-                alt="Featured dish"
-                fill
-                className="object-contain p-8"
-              />
-            </div>
+            <AnimatedFoodTruck />
           </div>
         </div>
       </section>
@@ -72,11 +66,11 @@ export default function Home() {
             <div className="bg-white p-6 rounded-2xl shadow-md border border-primary/20">
               <div className="flex items-center gap-4">
                 <div className="bg-primary/20 p-3 rounded-full">
-                  <Clock className="h-6 w-6 text-accent" />
+                  <Utensils className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="font-bold">Fast Delivery</h3>
-                  <p className="text-sm text-gray-600">Fresh food delivered to your location</p>
+                  <h3 className="font-bold">Fusion Cuisine</h3>
+                  <p className="text-sm text-gray-600">Unique blend of Asian flavors</p>
                 </div>
               </div>
             </div>
@@ -121,11 +115,10 @@ export default function Home() {
             {FEATURED_DISHES.map((dish) => (
               <div key={dish.name} className="group relative overflow-hidden rounded-2xl bg-muted">
                 <div className="relative h-64">
-                  <Image
+                  <img
                     src={dish.image || "/placeholder.svg"}
                     alt={dish.name}
-                    fill
-                    className="object-cover transition duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-6">

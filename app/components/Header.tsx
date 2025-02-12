@@ -5,6 +5,7 @@ import { useState } from "react"
 import { ShoppingCart, Menu, X } from "lucide-react"
 import { useCart } from "../context/CartContext"
 import { Button } from "@/components/ui/button"
+import { MiniTruck } from "./MiniTruck"
 
 export default function Header() {
   const { cart } = useCart()
@@ -16,7 +17,11 @@ export default function Header() {
     <header className="fixed w-full z-50 bg-background shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-black hover:text-primary transition-colors">
+          <Link
+            href="/"
+            className="text-2xl font-bold text-black hover:text-primary transition-colors flex items-center"
+          >
+            <MiniTruck />
             Asian Fusion
           </Link>
 
