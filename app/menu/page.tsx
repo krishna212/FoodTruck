@@ -29,7 +29,7 @@ const MENU_ITEMS = {
       name: "Chicken Biryani",
       price: 15.99,
       description: "Classic chicken biryani with aromatic spices",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -38,7 +38,7 @@ const MENU_ITEMS = {
       name: "Veg Pulao",
       price: 12.99,
       description: "Fragrant rice cooked with mixed vegetables",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -47,7 +47,7 @@ const MENU_ITEMS = {
       name: "Crispy Cauliflower Biryani",
       price: 13.99,
       description: "Crispy cauliflower florets with biryani rice",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -58,7 +58,7 @@ const MENU_ITEMS = {
       name: "Chicken Puffs",
       price: 6.99,
       description: "Flaky pastry filled with spiced chicken",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Non-veg",
       spicyLevel: 1,
     },
@@ -67,7 +67,7 @@ const MENU_ITEMS = {
       name: "Veggie Puffs",
       price: 5.99,
       description: "Crispy pastry with seasoned vegetables",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -76,7 +76,7 @@ const MENU_ITEMS = {
       name: "Masala Vada",
       price: 6.99,
       description: "Indian-style falafel made with lentils and spices",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 2,
     },
@@ -87,7 +87,7 @@ const MENU_ITEMS = {
       name: "Garlic Scallion Fried Rice with Ginger Garlic Chicken",
       price: 14.99,
       description: "Fragrant fried rice with tender ginger garlic chicken",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Non-veg",
       spicyLevel: 1,
     },
@@ -96,7 +96,7 @@ const MENU_ITEMS = {
       name: "Kung Pao Chicken",
       price: 15.99,
       description: "Spicy stir-fried chicken with peanuts and vegetables",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -105,7 +105,7 @@ const MENU_ITEMS = {
       name: "Garlic Scallion Fried Rice with Pepper Mushroom",
       price: 13.99,
       description: "Aromatic fried rice with savory pepper mushrooms",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -125,7 +125,7 @@ const MENU_ITEMS = {
       name: "Boiling Shrimp",
       price: 16.99,
       description: "Spicy boiled shrimp in our signature sauce",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Non-veg",
       spicyLevel: 3,
     },
@@ -172,7 +172,7 @@ const MENU_ITEMS = {
       name: "Bread Pudding",
       price: 5.99,
       description: "Sweet and creamy dessert with Asian fusion twist",
-      image: "/placeholder.png", // Placeholder image
+      image: "/placeholder.png",
       category: "Veg",
       spicyLevel: 0,
     },
@@ -216,7 +216,7 @@ export default function Menu() {
   const scrollToSection = (categoryId: string) => {
     const element = document.getElementById(categoryId)
     if (element) {
-      const offset = 100 // Adjust this value based on your header height
+      const offset = 100
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - offset
 
@@ -299,7 +299,7 @@ export default function Menu() {
                   {category.icon}
                 </motion.span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
                 {MENU_ITEMS[category.id as keyof typeof MENU_ITEMS].map((item) => (
                   <MenuCard key={item.id} item={item} />
                 ))}

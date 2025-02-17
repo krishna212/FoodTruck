@@ -3,13 +3,48 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 
-export function AnimatedFoodTruck() {
+const SmokeParticle = ({ delay = 0, scale = 1 }: { delay?: number; scale?: number }) => (
+  <motion.div
+    className="absolute"
+    style={{
+      top: "35%",
+      right: `${30 + Math.random() * 10}%`,
+      width: 40 * scale,
+      height: 40 * scale,
+      filter: "blur(8px)",
+    }}
+    initial={{ opacity: 0, scale: 0.5, y: 0 }}
+    animate={{
+      opacity: [0, 0.3, 0],
+      scale: [0.5, 1.5, 2],
+      y: [-20, -60 * scale],
+    }}
+    transition={{
+      duration: 2,
+      repeat: Number.POSITIVE_INFINITY,
+      delay,
+      ease: "easeOut",
+    }}
+  >
+    <svg viewBox="0 0 100 100" className="w-full h-full">
+      <defs>
+        <radialGradient id={`smoke-gradient-${delay}`}>
+          <stop offset="0%" stopColor="rgba(255, 255, 255, 0.8)" />
+          <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="50" fill={`url(#smoke-gradient-${delay})`} filter="blur(8px)" />
+    </svg>
+  </motion.div>
+)
+
+export default function AnimatedFoodTruck() {
   return (
-    <div className="relative h-[400px] w-full">
+    <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
       <motion.div
         className="absolute inset-0"
         animate={{
-          y: [0, -5, 0],
+          y: [0, -10, 0],
         }}
         transition={{
           duration: 4,
@@ -18,76 +53,32 @@ export function AnimatedFoodTruck() {
         }}
       >
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-dQdyhSD175KJmcJ3JurFJYO7Lwvv1H.png"
-          alt="Asian Fusion Food Truck"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-0AC5bCbYsXdIhFydJqQKBuVECUOVPj.png"
+          alt="Fast Fusion Food Truck"
           fill
-          className="object-contain"
+          className="object-contain scale-[1.3]"
           priority
         />
       </motion.div>
 
-      {/* Animated smoke */}
-      {[...Array(5)].map((_, index) => (
-        <motion.div
-          key={index}
-          className="absolute top-1/4 right-1/4 w-8 h-8 bg-white rounded-full opacity-0"
-          animate={{
-            y: [-20, -100],
-            x: [0, index % 2 === 0 ? 20 : -20],
-            scale: [0.5, 3],
-            opacity: [0, 0.7, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeOut",
-            delay: index * 0.5,
-          }}
-        />
+      {/* Multiple smoke particles with different sizes and timings */}
+      {[...Array(8)].map((_, i) => (
+        <SmokeParticle key={i} delay={i * 0.3} scale={0.8 + Math.random() * 0.4} />
       ))}
 
-      {/* Animated order tickets */}
-      {[...Array(3)].map((_, index) => (
-        <motion.div
-          key={index}
-          className="absolute left-1/4 bottom-1/4 w-12 h-6 bg-white border border-gray-300 rounded"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{
-            y: [-50, -100],
-            x: [0, index % 2 === 0 ? 20 : -20],
-            opacity: [0, 1, 0],
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-            delay: index * 1.5,
-          }}
-        >
-          <div className="w-full h-1 bg-primary mt-1" />
-          <div className="w-3/4 h-1 bg-primary mt-1 mx-auto" />
-        </motion.div>
-      ))}
-
-      {/* Animated steam from food */}
-      {[...Array(3)].map((_, index) => (
-        <motion.div
-          key={index}
-          className="absolute top-1/3 left-1/3 w-1 h-6 bg-white opacity-0"
-          animate={{
-            y: [-10, -30],
-            scaleY: [0.5, 1.5],
-            opacity: [0, 0.7, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeOut",
-            delay: index * 0.6,
-          }}
-        />
-      ))}
+      {/* Heat distortion effect */}
+      <motion.div
+        className="absolute top-[32%] right-[28%] w-32 h-32 bg-gradient-radial from-white/10 to-transparent rounded-full blur-xl"
+        animate={{
+          opacity: [0.1, 0.3, 0.1],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+      />
     </div>
   )
 }

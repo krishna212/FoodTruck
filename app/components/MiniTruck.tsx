@@ -3,10 +3,10 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 
-export function MiniTruck() {
+export default function MiniTruck() {
   return (
     <motion.div
-      className="w-8 h-8 relative inline-block align-middle mr-2"
+      className="w-8 h-8 relative inline-flex items-center"
       animate={{
         x: [0, 5, 0],
         rotate: [0, 5, 0],
@@ -18,7 +18,7 @@ export function MiniTruck() {
       }}
     >
       <Image
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-dQdyhSD175KJmcJ3JurFJYO7Lwvv1H.png"
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck.jpg-L7c136eSuhYzEcUxlFfKb9rrDBAVGm.png"
         alt="Food Truck"
         width={32}
         height={32}
