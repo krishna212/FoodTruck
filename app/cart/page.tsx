@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useCart } from "../context/CartContext"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
@@ -11,6 +11,11 @@ export default function Cart() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
   const handleCheckout = async () => {
@@ -19,6 +24,7 @@ export default function Cart() {
       // Simulate a checkout process
       await new Promise((resolve) => setTimeout(resolve, 2000))
       clearCart()
+      window.scrollTo(0, 0) // Scroll to top before navigation
       router.push("/order-confirmation")
     } catch (error) {
       console.error("Error processing order:", error)
@@ -34,6 +40,15 @@ export default function Cart() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-6 text-black">Your Cart</h1>
           <p className="text-gray-600">Your cart is empty.</p>
+          <Button
+            className="mt-8 bg-primary text-black hover:bg-accent"
+            onClick={() => {
+              window.scrollTo(0, 0)
+              router.push("/menu")
+            }}
+          >
+            Browse Menu
+          </Button>
         </div>
       </div>
     )
@@ -59,12 +74,12 @@ export default function Cart() {
         </div>
         <div className="mt-8 space-y-4">
           <div className="text-2xl font-bold text-black">Total: ${total.toFixed(2)}</div>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Button
               size="lg"
               onClick={handleCheckout}
               disabled={isLoading}
-              className="bg-primary text-black hover:bg-accent transition-colors duration-200"
+              className="w-full sm:w-auto bg-primary text-black hover:bg-accent transition-colors duration-200"
             >
               {isLoading ? "Processing..." : "Checkout"}
             </Button>
@@ -72,7 +87,7 @@ export default function Cart() {
               variant="outline"
               size="lg"
               onClick={clearCart}
-              className="border-primary text-primary hover:bg-primary hover:text-black transition-colors duration-200"
+              className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-black transition-colors duration-200"
             >
               Clear Cart
             </Button>

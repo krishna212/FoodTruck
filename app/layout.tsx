@@ -23,11 +23,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={cn(notoSans.className, "min-h-screen bg-background text-foreground antialiased")}>
         <CartProvider>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
         </CartProvider>
       </body>

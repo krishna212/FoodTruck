@@ -7,11 +7,18 @@ import { Button } from "@/components/ui/button"
 import { ChevronRight, Utensils, ShoppingBag, Truck } from "lucide-react"
 import AnimatedFoodTruck from "./components/AnimatedFoodTruck"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
+  const router = useRouter()
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     const container = containerRef.current
@@ -66,7 +73,12 @@ export default function Home() {
     }
   }, [currentSection, isScrolling])
 
-  // Navigation dots
+  // Handle navigation with scroll restoration
+  const handleNavigation = (path: string) => {
+    window.scrollTo(0, 0)
+    router.push(path)
+  }
+
   const dots = (
     <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col gap-2">
       {[0, 1, 2].map((index) => (
@@ -87,65 +99,69 @@ export default function Home() {
   )
 
   return (
-    <div className="h-screen overflow-hidden" ref={containerRef}>
+    <div className="min-h-screen overflow-x-hidden" ref={containerRef}>
       {dots}
 
       {/* Hero Section */}
-      <section className="h-screen snap-start bg-secondary flex items-center justify-center">
+      <section className="h-screen snap-start bg-secondary flex items-center justify-center pt-16 md:pt-0">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+            {/* Food Truck */}
             <motion.div
-              className="z-10 text-center md:text-left"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6">
-                Asian Fusion
-                <span className="block text-accent">Food Truck</span>
-              </h1>
-              <p className="text-gray-700 mb-6 md:mb-8 text-lg">
-                Experience the perfect blend of Korean, Japanese, Chinese, Philippine, and Indian cuisines
-              </p>
-              <div className="flex gap-4 justify-center md:justify-start">
-                <Link href="/menu">
-                  <Button size="lg" className="bg-primary text-black hover:bg-accent transition-colors duration-200">
-                    Order Now
-                    <ChevronRight className="ml-2" />
-                  </Button>
-                </Link>
-                <Link href="/menu">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
-                  >
-                    View Menu
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-            <motion.div
-              className="relative order-first md:order-last"
+              className="relative w-full md:w-1/2 -mt-12 md:mt-8 translate-x-4 md:translate-x-0 md:order-last"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
               <AnimatedFoodTruck />
             </motion.div>
+
+            {/* Text Content */}
+            <motion.div
+              className="z-10 text-center md:text-left max-w-lg w-full md:mt-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
+                Asian Fusion
+                <span className="block text-accent">Food Truck</span>
+              </h1>
+              <p className="text-gray-700 mb-6 md:mb-8 text-base sm:text-lg">
+                Experience the perfect blend of Korean, Japanese, Chinese, Philippine, and Indian cuisines
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-primary text-black hover:bg-accent transition-colors duration-200"
+                  onClick={() => handleNavigation("/menu")}
+                >
+                  Order Now
+                  <ChevronRight className="ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
+                  onClick={() => handleNavigation("/menu")}
+                >
+                  View Menu
+                </Button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="h-screen snap-start bg-background flex items-center">
+      <section className="min-h-screen py-20 snap-start bg-background flex items-center">
         <motion.div
           className="container mx-auto px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: currentSection === 1 ? 1 : 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
                 icon: <Utensils className="h-6 w-6 text-accent" />,
@@ -165,7 +181,7 @@ export default function Home() {
             ].map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="bg-white p-6 md:p-8 rounded-2xl shadow-lg"
+                className="bg-white p-6 rounded-2xl shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: currentSection === 1 ? 1 : 0, y: currentSection === 1 ? 0 : 20 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -181,7 +197,7 @@ export default function Home() {
       </section>
 
       {/* Popular Dishes Section */}
-      <section className="h-screen snap-start bg-white flex items-center">
+      <section className="min-h-screen py-20 snap-start bg-white flex items-center">
         <div className="container mx-auto px-4">
           <motion.div
             className="max-w-6xl mx-auto"
@@ -193,11 +209,11 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Popular <span className="text-primary">Dishes</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 max-w-2xl mx-auto px-4">
                 Discover our most loved fusion dishes that bring together the best of Asian cuisines
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
                   name: "Spicy Beef Brisket Soup",
@@ -220,7 +236,7 @@ export default function Home() {
               ].map((dish, index) => (
                 <motion.div
                   key={dish.name}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden"
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{
                     opacity: currentSection === 2 ? 1 : 0,
@@ -229,19 +245,19 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   whileHover={{ y: -10 }}
                 >
-                  <div className="relative h-48 md:h-56">
+                  <div className="relative h-48 w-full">
                     <Image
                       src={dish.image || "/placeholder.svg"}
                       alt={dish.name}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-xl font-bold mb-2">{dish.name}</h3>
-                    <p className="text-gray-600 mb-4">{dish.description}</p>
-                    <Link href="/menu">
+                    <p className="text-gray-600 mb-4 flex-grow">{dish.description}</p>
+                    <Link href="/menu" className="mt-auto">
                       <Button className="w-full bg-primary text-black hover:bg-accent">Order Now</Button>
                     </Link>
                   </div>

@@ -50,17 +50,29 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-black p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
+          {/* Mobile Navigation */}
+          <div className="flex items-center gap-4 md:hidden">
+            {/* Cart Button - Always visible on mobile */}
+            <Link href="/cart">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-2 border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                <span className="hidden sm:inline">Cart</span>
+                <span className="inline sm:hidden">{totalItems}</span>
+              </Button>
+            </Link>
+
+            {/* Menu Button */}
+            <button className="text-black p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+              {isMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </nav>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
             className="md:hidden pt-4 pb-2"
@@ -82,16 +94,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Menu
-              </Link>
-              <Link href="/cart" onClick={() => setIsMenuOpen(false)}>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2 w-full border-2 border-primary bg-white text-black hover:bg-primary hover:text-black transition-colors duration-200"
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  <span>Cart ({totalItems})</span>
-                </Button>
               </Link>
             </nav>
           </motion.div>
