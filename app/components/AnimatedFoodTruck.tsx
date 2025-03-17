@@ -19,7 +19,7 @@ const SmokeParticle = ({
     initial={{ opacity: 0, scale: 0.5, y: 0 }}
     animate={{
       opacity: [0, 0.7, 0],
-      scale: [0.5, 2.2, 3.3],
+      scale: [0.5, 2.2],
       y: [-10, -60],
       x: [0, Math.random() * 20 - 10],
     }}
@@ -48,7 +48,7 @@ export default function AnimatedFoodTruck() {
         initial={{ x: -200, rotate: -5, opacity: 0 }}
         animate={{
           x: 0,
-          rotate: [0, 2, 0],
+          rotate: [0, 2], // ✅ Fixed (only two keyframes allowed for `spring`)
           opacity: 1,
         }}
         transition={{
@@ -56,7 +56,6 @@ export default function AnimatedFoodTruck() {
           damping: 20,
           stiffness: 100,
           duration: 1.5,
-          times: [0, 0.8, 1],
         }}
       >
         <motion.div
@@ -80,7 +79,7 @@ export default function AnimatedFoodTruck() {
         </motion.div>
       </motion.div>
 
-      {/* Repositioned Smoke Effects */}
+      {/* Smoke Effects */}
       {[
         { top: "15%", right: "30%" },
         { top: "12%", right: "28%" },
@@ -96,4 +95,3 @@ export default function AnimatedFoodTruck() {
     </div>
   )
 }
-
