@@ -5,38 +5,74 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useCart } from "../context/CartContext"
-import { Plus } from "lucide-react"
+import { Plus, ChevronDown, ChevronUp } from "lucide-react"
+
+type CustomizableOption = {
+  id: number
+  name: string
+  price: number
+}
 
 type MenuItem = {
   id: number
   name: string
   price: number
   description: string
-  image?: string
+  image: string
   category: string
   spicyLevel: number
+  options?: CustomizableOption[]
 }
 
-export function MenuCard({ item }: { item: MenuItem }) {
+type MenuCardProps = {
+  item: MenuItem
+  customizable?: boolean
+}
+
+export function MenuCard({ item, customizable = false }: MenuCardProps) {
   const { addToCart } = useCart()
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false)
+  const [selectedOption, setSelectedOption] = useState<CustomizableOption | null>(
+    item.options && item.options.length > 0 ? item.options[0] : null,
+  )
   const cardRef = useRef<HTMLDivElement>(null)
 
   const handleAddToCart = () => {
-    addToCart(item)
+    if (customizable && selectedOption) {
+      addToCart({
+        id: item.id * 100 + selectedOption.id, // Create a unique ID for each option
+        name: `${item.name} (${selectedOption.name})`,
+        price: selectedOption.price,
+      })
+    } else {
+      addToCart(item)
+    }
+
     setShowConfirmation(true)
     setTimeout(() => setShowConfirmation(false), 2000)
   }
 
+  const toggleOptions = () => {
+    if (customizable) {
+      setIsOptionsOpen(!isOptionsOpen)
+    }
+  }
+
+  const selectOption = (option: CustomizableOption) => {
+    setSelectedOption(option)
+    setIsOptionsOpen(false)
+  }
+
   return (
     <motion.div
-      className="relative flex flex-col"
+      className="relative flex flex-col bg-white rounded-xl shadow-md overflow-hidden h-full"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
       ref={cardRef}
     >
       {/* Food Image Section */}
-      <div className="relative h-0 pb-[70%] mb-4">
+      <div className="relative h-0 pb-[70%]">
         <motion.div
           className="absolute inset-0"
           initial={{ y: 20, opacity: 0 }}
@@ -47,7 +83,7 @@ export function MenuCard({ item }: { item: MenuItem }) {
             src={item.image || "/placeholder.svg"}
             alt={item.name}
             fill
-            className="object-contain transform hover:scale-105 transition-transform duration-300"
+            className="object-cover transform hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
@@ -84,15 +120,56 @@ export function MenuCard({ item }: { item: MenuItem }) {
       </div>
 
       {/* Content Section */}
-      <div className="flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-bold text-black">{item.name}</h3>
-          <span className="text-xl font-bold text-accent">${item.price.toFixed(2)}</span>
+          <span className="text-xl font-bold text-accent">
+            ${customizable && selectedOption ? selectedOption.price.toFixed(2) : item.price.toFixed(2)}
+          </span>
         </div>
         <p className="text-gray-600 text-sm mb-4 flex-1">{item.description}</p>
+
+        {/* Options Dropdown for customizable items */}
+        {customizable && item.options && (
+          <div className="mb-4">
+            <div
+              className="border border-gray-300 rounded-md p-3 flex justify-between items-center cursor-pointer"
+              onClick={toggleOptions}
+            >
+              <span>{selectedOption?.name || "Select option"}</span>
+              {isOptionsOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+            </div>
+
+            <AnimatePresence>
+              {isOptionsOpen && (
+                <motion.div
+                  className="border border-gray-300 border-t-0 rounded-b-md overflow-hidden"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.options.map((option) => (
+                    <div
+                      key={option.id}
+                      className={`p-3 cursor-pointer hover:bg-gray-100 ${selectedOption?.id === option.id ? "bg-primary/20" : ""}`}
+                      onClick={() => selectOption(option)}
+                    >
+                      <div className="flex justify-between">
+                        <span>{option.name}</span>
+                        <span>${option.price.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
         <Button
           onClick={handleAddToCart}
-          className="w-full bg-primary text-black hover:bg-accent transition-colors duration-200"
+          className="w-full bg-primary text-black hover:bg-accent transition-colors duration-200 mt-auto"
           size="sm"
         >
           Add to Cart
@@ -123,7 +200,7 @@ export function MenuCard({ item }: { item: MenuItem }) {
                   }}
                 >
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-0AC5bCbYsXdIhFydJqQKBuVECUOVPj.png"
+                    src="/assets/images/truck.png"
                     alt="Food Truck"
                     width={32}
                     height={32}

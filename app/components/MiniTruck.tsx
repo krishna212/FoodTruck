@@ -17,13 +17,7 @@ export default function MiniTruck() {
         ease: "easeInOut",
       }}
     >
-      <Image
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck.jpg-L7c136eSuhYzEcUxlFfKb9rrDBAVGm.png"
-        alt="Food Truck"
-        width={32}
-        height={32}
-        className="object-contain"
-      />
+      <Image src="/assets/images/truck.png" alt="Food Truck" width={32} height={32} className="object-contain" />
     </motion.div>
   )
 }

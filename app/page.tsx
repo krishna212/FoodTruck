@@ -218,20 +218,17 @@ export default function Home() {
                 {
                   name: "Spicy Beef Brisket Soup",
                   description: "Rich and hearty Korean-style beef soup",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/beef-EsM2Bs7x7Ijz5deQzXhwEcXovejyNP.png",
+                  image: "/assets/images/beef-soup.jpg",
                 },
                 {
-                  name: "Chicken 65 Biryani",
-                  description: "Spicy chicken 65 with aromatic biryani rice",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chicken65-OIxKNVPUXjC9fK82mjFW0P9fKrM1NR.png",
+                  name: "Chicken 65",
+                  description: "Spicy, deep-fried chicken marinated in flavorful spices",
+                  image: "/assets/images/chicken-65.jpg",
                 },
                 {
                   name: "Fusion Ramen",
                   description: "Japanese ramen with a unique twist",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ramen-MSR0tfF6wk8I31nqETsfUmu3CVoAdA.png",
+                  image: "/assets/images/ramen.jpg",
                 },
               ].map((dish, index) => (
                 <motion.div

@@ -20,12 +20,7 @@ export default function Header() {
         <nav className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
             <div className="relative w-8 h-8 md:w-10 md:h-10">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-0AC5bCbYsXdIhFydJqQKBuVECUOVPj.png"
-                alt="Fast Fusion"
-                fill
-                className="object-contain"
-              />
+              <Image src="/assets/images/truck.png" alt="Fast Fusion" fill className="object-contain" />
             </div>
             <span className="text-xl md:text-2xl font-bold text-black">Fast Fusion</span>
           </Link>

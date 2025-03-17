@@ -22,13 +22,7 @@ export function FoodTruckHero() {
         }}
         className="relative h-full"
       >
-        <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-dQdyhSD175KJmcJ3JurFJYO7Lwvv1H.png"
-          alt="Asian Fusion Food Truck"
-          fill
-          className="object-contain"
-          priority
-        />
+        <Image src="/assets/images/truck.png" alt="Asian Fusion Food Truck" fill className="object-contain" priority />
       </motion.div>
     </motion.div>
   )

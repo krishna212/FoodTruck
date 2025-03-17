@@ -71,7 +71,7 @@ export default function AnimatedFoodTruck() {
           }}
         >
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/truck-0AC5bCbYsXdIhFydJqQKBuVECUOVPj.png"
+            src="/assets/images/truck.png"
             alt="Fast Fusion Food Truck"
             fill
             className="object-contain scale-110 sm:scale-125 md:scale-[1.35] -ml-4 sm:-ml-6 md:-ml-8 md:-mt-4"

@@ -4,14 +4,15 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { MenuCard } from "../components/MenuCard"
 
+// Create a public/images directory for the food images
 const MENU_ITEMS = {
-  biryani_bowl: [
+  indian: [
     {
       id: 1,
-      name: "Chicken 65 Biryani",
+      name: "Chicken 65",
       price: 15.99,
-      description: "Spicy chicken 65 with aromatic biryani rice",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/chicken65-OIxKNVPUXjC9fK82mjFW0P9fKrM1NR.png",
+      description: "Spicy, deep-fried chicken marinated in flavorful spices",
+      image: "/assets/images/chicken-65.jpg",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -20,7 +21,7 @@ const MENU_ITEMS = {
       name: "Mutton Biryani",
       price: 17.99,
       description: "Tender mutton pieces with fragrant biryani rice",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/biryani-0FCxR2ntJuNS5jpJtRqqskGltChsu7.png",
+      image: "/assets/images/mutton-biryani.jpg",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -29,7 +30,7 @@ const MENU_ITEMS = {
       name: "Chicken Biryani",
       price: 15.99,
       description: "Classic chicken biryani with aromatic spices",
-      image: "/placeholder.png",
+      image: "/placeholder.svg?height=300&width=300",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -38,7 +39,7 @@ const MENU_ITEMS = {
       name: "Veg Pulao",
       price: 12.99,
       description: "Fragrant rice cooked with mixed vegetables",
-      image: "/placeholder.png",
+      image: "/assets/images/vegpulao.jpg",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -47,27 +48,7 @@ const MENU_ITEMS = {
       name: "Crispy Cauliflower Biryani",
       price: 13.99,
       description: "Crispy cauliflower florets with biryani rice",
-      image: "/placeholder.png",
-      category: "Veg",
-      spicyLevel: 1,
-    },
-  ],
-  starters: [
-    {
-      id: 6,
-      name: "Chicken Puffs",
-      price: 6.99,
-      description: "Flaky pastry filled with spiced chicken",
-      image: "/placeholder.png",
-      category: "Non-veg",
-      spicyLevel: 1,
-    },
-    {
-      id: 7,
-      name: "Veggie Puffs",
-      price: 5.99,
-      description: "Crispy pastry with seasoned vegetables",
-      image: "/placeholder.png",
+      image: "/assets/images/crispy-cauliflower.jpg",
       category: "Veg",
       spicyLevel: 1,
     },
@@ -76,47 +57,95 @@ const MENU_ITEMS = {
       name: "Masala Vada",
       price: 6.99,
       description: "Indian-style falafel made with lentils and spices",
-      image: "/placeholder.png",
+      image: "/assets/images/masala-vada.jpg",
       category: "Veg",
       spicyLevel: 2,
+    },
+    {
+      id: 6,
+      name: "Chicken Puffs",
+      price: 6.99,
+      description: "Flaky pastry filled with spiced chicken",
+      image: "/assets/images/chicken-puffs.jpg",
+      category: "Non-veg",
+      spicyLevel: 1,
+    },
+    {
+      id: 7,
+      name: "Veggie Puffs",
+      price: 5.99,
+      description: "Crispy pastry with seasoned vegetables",
+      image: "/assets/images/veg_puffs.jpg",
+      category: "Veg",
+      spicyLevel: 1,
     },
   ],
   chinese: [
     {
       id: 9,
-      name: "Garlic Scallion Fried Rice with Ginger Garlic Chicken",
+      name: "Garlic Scallion Fried Rice (Non-Veg)",
       price: 14.99,
-      description: "Fragrant fried rice with tender ginger garlic chicken",
-      image: "/placeholder.png",
+      description: "Our signature fried rice with fresh garlic and scallions",
+      image: "/assets/images/chicken-scallion.jpg",
       category: "Non-veg",
       spicyLevel: 1,
-    },
-    {
-      id: 10,
-      name: "Kung Pao Chicken",
-      price: 15.99,
-      description: "Spicy stir-fried chicken with peanuts and vegetables",
-      image: "/placeholder.png",
-      category: "Non-veg",
-      spicyLevel: 2,
+      customizable: true,
+      options: [
+        { id: 1, name: "Ginger Garlic Chicken", price: 14.99 },
+        { id: 2, name: "Kung Pao Chicken", price: 15.99 },
+      ],
     },
     {
       id: 11,
-      name: "Garlic Scallion Fried Rice with Pepper Mushroom",
-      price: 13.99,
-      description: "Aromatic fried rice with savory pepper mushrooms",
-      image: "/placeholder.png",
+      name: "Garlic Scallion Fried Rice (Veg)",
+      price: 12.99,
+      description: "Our signature vegetarian fried rice with fresh garlic and scallions",
+      image: "/assets/images/veg_scallion.jpeg",
       category: "Veg",
+      spicyLevel: 1,
+      customizable: true,
+      options: [
+        { id: 1, name: "Pepper Mushroom", price: 13.99 },
+        { id: 2, name: "Mixed Vegetables", price: 12.99 },
+      ],
+    },
+    {
+      id: 22,
+      name: "Sesame Chicken with Fried Rice",
+      price: 11.0,
+      description: "Crispy chicken in sweet sesame sauce served with fried rice",
+      image: "/assets/images/sesame-chicken.jpg",
+      category: "Non-veg",
       spicyLevel: 1,
     },
     {
-      id: 12,
-      name: "Kung Pao Cauliflower",
-      price: 13.99,
-      description: "Spicy stir-fried cauliflower in Kung Pao sauce",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gobi-Ei4xhOpmwSMn7kNE4WbdsMLr74W0v5.png",
+      id: 23,
+      name: "Orange Chicken with Fried Rice",
+      price: 11.0,
+      description: "Tangy orange-flavored chicken served with fried rice",
+      image: "/assets/images/orange-chicken.jpg",
+      category: "Non-veg",
+      spicyLevel: 1,
+    },
+  ],
+  thai: [
+    {
+      id: 20,
+      name: "Drunken Veg Noodles",
+      price: 9.0,
+      description: "Stir-fried rice noodles with vegetables in a savory sauce",
+      image: "/assets/images/drunken-veg.jpg",
       category: "Veg",
       spicyLevel: 2,
+    },
+    {
+      id: 21,
+      name: "Drunken Chicken Noodles",
+      price: 11.0,
+      description: "Spicy stir-fried noodles with tender chicken and Thai basil",
+      image: "/assets/images/drunken-chicken.jpg",
+      category: "Non-veg",
+      spicyLevel: 3,
     },
   ],
   korean_japanese: [
@@ -125,7 +154,7 @@ const MENU_ITEMS = {
       name: "Boiling Shrimp",
       price: 16.99,
       description: "Spicy boiled shrimp in our signature sauce",
-      image: "/placeholder.png",
+      image: "/assets/images/boiling-shrimp.jpg",
       category: "Non-veg",
       spicyLevel: 3,
     },
@@ -134,7 +163,7 @@ const MENU_ITEMS = {
       name: "Spicy Beef Brisket Soup",
       price: 15.99,
       description: "Rich and hearty Korean-style beef soup",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/beef-EsM2Bs7x7Ijz5deQzXhwEcXovejyNP.png",
+      image: "/assets/images/beef-soup.jpg",
       category: "Non-veg",
       spicyLevel: 2,
     },
@@ -143,7 +172,7 @@ const MENU_ITEMS = {
       name: "Tteokbokki",
       price: 12.99,
       description: "Spicy rice cakes in a sweet and spicy gochujang sauce",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tekbotti-jp3rwgyi0hZQdZ8AR5zPwjhauq4OW6.png",
+      image: "/assets/images/topukki.jpeg",
       category: "Veg",
       spicyLevel: 3,
     },
@@ -152,7 +181,7 @@ const MENU_ITEMS = {
       name: "Fusion Ramen",
       price: 14.99,
       description: "Japanese-style noodles in a rich, flavorful broth",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ramen-MSR0tfF6wk8I31nqETsfUmu3CVoAdA.png",
+      image: "/assets/images/ramen.jpg",
       category: "Non-veg",
       spicyLevel: 1,
     },
@@ -161,27 +190,54 @@ const MENU_ITEMS = {
       name: "Spicy Stir-Fried Chicken",
       price: 15.99,
       description: "Tender chicken stir-fried with fresh vegetables in our special sauce",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spicychicken-qkOogwmmbUcjxajnfFbcBYhtiLmow8.png",
+      image: "/assets/images/spicy-chicken-stir-fry.jpg",
       category: "Non-veg",
       spicyLevel: 2,
-    },
-  ],
-  sides: [
-    {
-      id: 18,
-      name: "Bread Pudding",
-      price: 5.99,
-      description: "Sweet and creamy dessert with Asian fusion twist",
-      image: "/placeholder.png",
-      category: "Veg",
-      spicyLevel: 0,
     },
     {
       id: 19,
       name: "Cucumber Salad",
       price: 4.99,
       description: "Fresh cucumber with Asian-style dressing",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cucumber-cJWXcL2eSH87r8uEzPn80IKnemR2Ra.png",
+      image: "/assets/images/cucumber-salad.jpg",
+      category: "Veg",
+      spicyLevel: 0,
+    },
+  ],
+  desserts: [
+    {
+      id: 18,
+      name: "Bread Pudding",
+      price: 5.99,
+      description: "Sweet and creamy dessert with Asian fusion twist",
+      image: "/assets/images/bread-pudding.jpg",
+      category: "Veg",
+      spicyLevel: 0,
+    },
+    {
+      id: 24,
+      name: "Tiramisu",
+      price: 4.0,
+      description: "Classic Italian dessert with coffee-soaked ladyfingers and mascarpone cream",
+      image: "/assets/images/tiramisu.jpg",
+      category: "Veg",
+      spicyLevel: 0,
+    },
+    {
+      id: 25,
+      name: "Strawberry Misu",
+      price: 4.0,
+      description: "A fruity twist on the classic tiramisu with fresh strawberries",
+      image: "/assets/images/strawberry-misu.jpg",
+      category: "Veg",
+      spicyLevel: 0,
+    },
+    {
+      id: 26,
+      name: "Brownies",
+      price: 2.0,
+      description: "Rich, fudgy chocolate brownies with a crisp top",
+      image: "/assets/images/brownies.jpg",
       category: "Veg",
       spicyLevel: 0,
     },
@@ -190,6 +246,11 @@ const MENU_ITEMS = {
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -228,11 +289,11 @@ export default function Menu() {
   }
 
   const categories = [
-    { id: "biryani_bowl", name: "Biryani Bowl", icon: "🍚" },
-    { id: "starters", name: "Starters", icon: "🥟" },
-    { id: "chinese", name: "Chinese", icon: "🥢" },
-    { id: "korean_japanese", name: "Korean & Japanese", icon: "🍜" },
-    { id: "sides", name: "Sides & Desserts", icon: "🥗" },
+    { id: "indian", name: "Indian", icon: "🇮🇳" },
+    { id: "chinese", name: "Chinese", icon: "🇨🇳" },
+    { id: "thai", name: "Thai", icon: "🇹🇭" },
+    { id: "korean_japanese", name: "Korean & Japanese", icon: "🇰🇷🇯🇵" },
+    { id: "desserts", name: "Desserts", icon: "🍰" },
   ]
 
   return (
@@ -246,7 +307,7 @@ export default function Menu() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">Our Menu</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our fusion of Korean, Japanese, Chinese, and Indian flavors
+            Discover our fusion of Korean, Japanese, Chinese, Thai, and Indian cuisines
           </p>
         </motion.div>
 
@@ -299,10 +360,15 @@ export default function Menu() {
                   {category.icon}
                 </motion.span>
               </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-                {MENU_ITEMS[category.id as keyof typeof MENU_ITEMS].map((item) => (
-                  <MenuCard key={item.id} item={item} />
-                ))}
+                {MENU_ITEMS[category.id as keyof typeof MENU_ITEMS].map((item) =>
+                  "customizable" in item && item.customizable ? (
+                    <MenuCard key={item.id} item={item} customizable={true} />
+                  ) : (
+                    <MenuCard key={item.id} item={item} />
+                  ),
+                )}
               </div>
             </motion.section>
           ))}
