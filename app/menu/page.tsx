@@ -50,7 +50,7 @@ const MENU_ITEMS = {
       name: "Hyderabadi Chicken Biryani",
       price: 14.99,
       description: "Fragrant basmati rice cooked with tender chicken and aromatic spices",
-      image: "/assets/images/chicken-briyani.jpg",
+      image: "/assets/images/chicken-biryani.jpg",
       category: "Non-veg",
       spicyLevel: 2,
     },

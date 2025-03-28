@@ -5,7 +5,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useCart } from "../context/CartContext"
-import { Plus, ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 type CustomizableOption = {
   id: number
@@ -39,6 +39,7 @@ export function MenuCard({ item, customizable = false }: MenuCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
   const handleAddToCart = () => {
+    /* 
     if (customizable && selectedOption) {
       addToCart({
         id: item.id * 100 + selectedOption.id, // Create a unique ID for each option
@@ -48,6 +49,7 @@ export function MenuCard({ item, customizable = false }: MenuCardProps) {
     } else {
       addToCart(item)
     }
+    */
 
     setShowConfirmation(true)
     setTimeout(() => setShowConfirmation(false), 2000)
@@ -167,6 +169,8 @@ export function MenuCard({ item, customizable = false }: MenuCardProps) {
           </div>
         )}
 
+        {/* Add to Cart button removed temporarily - functionality code kept intact */}
+        {/* 
         <Button
           onClick={handleAddToCart}
           className="w-full bg-primary text-black hover:bg-accent transition-colors duration-200 mt-auto"
@@ -175,6 +179,11 @@ export function MenuCard({ item, customizable = false }: MenuCardProps) {
           Add to Cart
           <Plus className="ml-2 h-4 w-4" />
         </Button>
+        */}
+       {/*
+        <Button disabled className="w-full bg-gray-300 text-gray-600 mt-auto cursor-not-allowed" size="sm">
+          Ordering Coming Soon
+        </Button>    */}
       </div>
 
       {/* Add to Cart Animation - Centered on card */}

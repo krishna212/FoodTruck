@@ -216,9 +216,9 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
-                  name: "Spicy Beef Brisket Soup",
-                  description: "Rich and hearty Korean-style beef soup",
-                  image: "/assets/images/beef-soup.jpg",
+                  name: "Hyderabadi Chicken Biryani",
+                  description: "Fragrant basmati rice cooked with tender chicken and aromatic spices",
+                  image: "/assets/images/chicken-biryani.jpg",
                 },
                 {
                   name: "Chicken 65",
@@ -226,9 +226,9 @@ export default function Home() {
                   image: "/assets/images/chicken-65.jpg",
                 },
                 {
-                  name: "Fusion Ramen",
-                  description: "Japanese ramen with a unique twist",
-                  image: "/assets/images/ramen.jpg",
+                  name: "Garlic Shrimp Noodle",
+                  description: "Stir-fried noodles with shrimp and garlic sauce",
+                  image: "/assets/images/shrimp-noodles.jpg",
                 },
               ].map((dish, index) => (
                 <motion.div
@@ -255,7 +255,7 @@ export default function Home() {
                     <h3 className="text-xl font-bold mb-2">{dish.name}</h3>
                     <p className="text-gray-600 mb-4 flex-grow">{dish.description}</p>
                     <Link href="/menu" className="mt-auto">
-                      <Button className="w-full bg-primary text-black hover:bg-accent">Order Now</Button>
+                      <Button className="w-full bg-primary text-black hover:bg-accent">View Menu</Button>
                     </Link>
                   </div>
                 </motion.div>
