@@ -14,6 +14,15 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-lg font-bold mb-4">Location & Hours</h4>
+            <a
+    href="https://www.google.com/maps/place/5050+E+Garford+St,+Long+Beach,+CA+90815"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-600 underline hover:text-blue-800"
+  >
+    Beverly Plaza Apartments, Long Beach.
+  </a>
+
             <p className="text-foreground">Monday - Saturday</p>
             <p className="text-foreground">11:00 AM - 9:00 PM</p>
             <p className="text-foreground mt-2">Check our social media for daily locations!</p>

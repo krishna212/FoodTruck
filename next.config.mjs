@@ -1,13 +1,6 @@
-let userConfig = undefined
-try {
-  userConfig = await import('./v0-user-next.config')
-} catch (e) {
-  // ignore error
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // <<<<<< YOU MUST ADD THIS
+  output: 'export', // ✅ THIS IS REQUIRED FOR STATIC EXPORT NOW
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -24,12 +17,17 @@ const nextConfig = {
   },
 }
 
+let userConfig = undefined
+try {
+  userConfig = await import('./v0-user-next.config')
+} catch (e) {
+  // ignore
+}
+
 mergeConfig(nextConfig, userConfig)
 
 function mergeConfig(nextConfig, userConfig) {
-  if (!userConfig) {
-    return
-  }
+  if (!userConfig) return
 
   for (const key in userConfig) {
     if (
