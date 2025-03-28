@@ -33,7 +33,7 @@ export default function Header() {
             <Link href="/menu" className="text-foreground hover:text-primary transition-colors">
               Menu
             </Link>
-            <Link href="/cart">
+         {/*   <Link href="/cart">
               <Button
                 variant="outline"
                 size="sm"
@@ -42,13 +42,13 @@ export default function Header() {
                 <ShoppingCart className="h-4 w-4" />
                 <span>Cart ({totalItems})</span>
               </Button>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex items-center gap-4 md:hidden">
             {/* Cart Button - Always visible on mobile */}
-            <Link href="/cart">
+           {/*    <Link href="/cart">
               <Button
                 variant="outline"
                 size="sm"
@@ -58,7 +58,7 @@ export default function Header() {
                 <span className="hidden sm:inline">Cart</span>
                 <span className="inline sm:hidden">{totalItems}</span>
               </Button>
-            </Link>
+            </Link> */}
 
             {/* Menu Button */}
             <button className="text-black p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
