@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation"
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
-  const [isScrolling, setIsScrolling] = useState(false)
   const router = useRouter()
 
   // Scroll to top on mount
@@ -21,62 +20,37 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const handleScroll = () => {
+      if (!containerRef.current) return
 
-    const sections = container.querySelectorAll("section")
+      const sections = containerRef.current.querySelectorAll("section")
+      const scrollPosition = window.scrollY + 100 // Offset for better detection
 
-    const scrollToSection = (index: number) => {
-      if (isScrolling) return
-      setIsScrolling(true)
-      sections[index].scrollIntoView({ behavior: "smooth" })
-      setCurrentSection(index)
-      setTimeout(() => setIsScrolling(false), 1000)
-    }
+      sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.offsetHeight
 
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
-
-      if (e.deltaY > 0 && currentSection < sections.length - 1) {
-        scrollToSection(currentSection + 1)
-      } else if (e.deltaY < 0 && currentSection > 0) {
-        scrollToSection(currentSection - 1)
-      }
-    }
-
-    let touchStart = 0
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStart = e.touches[0].clientY
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchEnd = e.touches[0].clientY
-      const delta = touchStart - touchEnd
-
-      if (Math.abs(delta) > 50) {
-        if (delta > 0 && currentSection < sections.length - 1) {
-          scrollToSection(currentSection + 1)
-        } else if (delta < 0 && currentSection > 0) {
-          scrollToSection(currentSection - 1)
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          setCurrentSection(index)
         }
-      }
+      })
     }
 
-    container.addEventListener("wheel", handleWheel, { passive: false })
-    container.addEventListener("touchstart", handleTouchStart)
-    container.addEventListener("touchmove", handleTouchMove)
-
-    return () => {
-      container.removeEventListener("wheel", handleWheel)
-      container.removeEventListener("touchstart", handleTouchStart)
-      container.removeEventListener("touchmove", handleTouchMove)
-    }
-  }, [currentSection, isScrolling])
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Handle navigation with scroll restoration
   const handleNavigation = (path: string) => {
     window.scrollTo(0, 0)
     router.push(path)
+  }
+
+  const scrollToSection = (index: number) => {
+    const sections = containerRef.current?.querySelectorAll("section")
+    if (sections && sections[index]) {
+      sections[index].scrollIntoView({ behavior: "smooth" })
+    }
   }
 
   const dots = (
@@ -87,23 +61,18 @@ export default function Home() {
           className={`w-3 h-3 rounded-full transition-colors duration-200 ${
             currentSection === index ? "bg-primary" : "bg-gray-300"
           }`}
-          onClick={() => {
-            if (!isScrolling) {
-              setCurrentSection(index)
-              containerRef.current?.children[index].scrollIntoView({ behavior: "smooth" })
-            }
-          }}
+          onClick={() => scrollToSection(index)}
         />
       ))}
     </div>
   )
 
   return (
-    <div className="min-h-screen overflow-x-hidden" ref={containerRef}>
+    <div className="overflow-x-hidden" ref={containerRef}>
       {dots}
 
       {/* Hero Section */}
-      <section className="h-screen snap-start bg-secondary flex items-center justify-center pt-16 md:pt-0">
+      <section className="min-h-screen bg-secondary flex items-center justify-center pt-16 md:pt-0">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             {/* Food Truck */}
@@ -154,12 +123,13 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="min-h-screen py-20 snap-start bg-background flex items-center">
+      <section className="min-h-screen py-20 bg-background flex items-center">
         <motion.div
           className="container mx-auto px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: currentSection === 1 ? 1 : 0 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
@@ -183,8 +153,9 @@ export default function Home() {
                 key={feature.title}
                 className="bg-white p-6 rounded-2xl shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: currentSection === 1 ? 1 : 0, y: currentSection === 1 ? 0 : 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="bg-primary/20 p-4 rounded-full w-fit mb-4">{feature.icon}</div>
@@ -197,13 +168,14 @@ export default function Home() {
       </section>
 
       {/* Popular Dishes Section */}
-      <section className="min-h-screen py-20 snap-start bg-white flex items-center">
+      <section className="min-h-screen py-20 bg-white flex items-center">
         <div className="container mx-auto px-4">
           <motion.div
             className="max-w-6xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: currentSection === 2 ? 1 : 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -235,11 +207,9 @@ export default function Home() {
                   key={dish.name}
                   className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{
-                    opacity: currentSection === 2 ? 1 : 0,
-                    y: currentSection === 2 ? 0 : 20,
-                  }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
                   whileHover={{ y: -10 }}
                 >
                   <div className="relative h-48 w-full">
