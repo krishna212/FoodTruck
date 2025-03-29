@@ -39,7 +39,7 @@ const MENU_ITEMS = {
       name: "Crispy Cauliflower",
       price: 4.99,
       description: "Crispy cauliflower florets tossed in a flavorful sauce",
-      image: "/assets/images/Crispy-cauliflower.jpg",
+      image: "/assets/images/crispy-cauliflower.jpg",
       category: "Veg",
       spicyLevel: 1,
     },
