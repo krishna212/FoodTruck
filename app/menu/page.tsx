@@ -72,6 +72,24 @@ const MENU_ITEMS = {
       category: "Veg",
       spicyLevel: 1,
     },
+    {
+      id: 29,
+      name: "Thalapakatti Chicken Briyani",
+      price: 14.99,
+      description: "Fragrant basmati rice slow-cooked with tender chicken and signature Thalapakatti spices.",
+      image: "/assets/images/thal_chicken.jpg",
+      category: "Non-veg",
+      spicyLevel: 1,
+    },
+    {
+      id: 30,
+      name: "Thalapakatti Goat Briyani",
+      price: 16.99,
+      description: "Richly spiced basmati rice paired with succulent goat meat in traditional Thalapakatti style.",
+      image: "/assets/images/thal_goat.jpg",
+      category: "Non-veg",
+      spicyLevel: 1,
+    },
   ],
   rice: [
     {
