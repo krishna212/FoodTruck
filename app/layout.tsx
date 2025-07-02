@@ -12,9 +12,8 @@ const notoSans = Noto_Sans({
 })
 
 export const metadata = {
-  title: "Foodle - Fast Food Delivery",
-  description: "Order your favorite fast food online",
-    generator: 'v0.dev'
+  title: "Fast Fusion Food Truck",
+ 
 }
 
 export default function RootLayout({
