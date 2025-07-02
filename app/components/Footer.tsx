@@ -12,21 +12,49 @@ export default function Footer() {
               Bringing together the best flavors from Korea, Japan, China, Philippines, and India.
             </p>
           </div>
-          <div>
+            <div>
             <h4 className="text-lg font-bold mb-4">Location & Hours</h4>
-            <a
-    href="https://www.google.com/maps/place/5050+E+Garford+St,+Long+Beach,+CA+90815"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-600 underline hover:text-blue-800"
-  >
-    Beverly Plaza Apartments, Long Beach.
-  </a>
+            <div className="mb-4">
+              <p className="font-semibold">Wednesday 5-9 PM</p>
+              <Link
+              href="https://maps.google.com/?q=3210+E+Anaheim+St,+Long+Beach,+CA+90804"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground text-sm mb-2 underline hover:text-accent transition-colors"
+              >
+              3210 E Anaheim St, Long Beach, CA 90804
+              </Link>
+              <p className="font-semibold">Friday 5-9 PM</p>
+              <Link
+              href="https://maps.google.com/?q=1800-2000+Ximeno+Ave,+Long+Beach,+CA+90815"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground text-sm mb-2 underline hover:text-accent transition-colors"
+              >
+              1800-2000 Ximeno Ave, Long Beach, CA 90815
+              </Link>
+              <p className="font-semibold">Saturday 5-9 PM</p>
+              <Link
+              href="https://maps.google.com/?q=Aquarium+Way,+Long+Beach,+CA+90802"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground text-sm mb-2 underline hover:text-accent transition-colors"
+              >
+              Aquarium Way, Long Beach, CA 90802
+              </Link>
+              <p className="font-semibold">Sunday 5-9 PM</p>
+              <Link
+              href="https://maps.google.com/?q=Oceangate,+Long+Beach,+CA+90802"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground text-sm underline hover:text-accent transition-colors"
+              >
+              Oceangate, Long Beach, CA 90802
+              </Link>
+            </div>
 
-            <p className="text-foreground">Monday - Saturday</p>
-            <p className="text-foreground">11:00 AM - 9:00 PM</p>
-            <p className="text-foreground mt-2">Check our social media for daily locations!</p>
-          </div>
+            {/* <p className="text-foreground mt-2">Check our social media for daily locations!</p> */}
+            </div>
           <div>
             <h4 className="text-lg font-bold mb-4">Follow Us</h4>
             <div className="flex space-x-4">
