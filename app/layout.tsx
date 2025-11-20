@@ -12,8 +12,14 @@ const notoSans = Noto_Sans({
 })
 
 export const metadata = {
-  title: "Fast Fusion Food Truck",
- 
+  title: "Authentic Indian Food Truck | Dosa, Parotta, Kothu Parotta, Goat Curry",
+  description: "Best Indian food truck serving authentic Dosa, Parotta, Kothu Parotta, Goat Curry, Samosa Chat, Naan, Biryani & more. Fresh, traditional Indian cuisine on wheels.",
+  keywords: "Indian food truck, Dosa, Parotta, Kothu Parotta, Goat Curry, Samosa Chat, Indian fast food, Naan, Dahi Puri, Sev Puri, Chat, Indian street food, authentic Indian cuisine, Indian food delivery",
+  openGraph: {
+    title: "Authentic Indian Food Truck | Dosa, Parotta & Goat Curry",
+    description: "Experience authentic Indian cuisine with our signature Kothu Parotta, Goat Curry, Dosa, and traditional Indian street food.",
+    type: "website",
+  },
 }
 
 export default function RootLayout({

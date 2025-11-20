@@ -7,9 +7,9 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Asian Fusion</h3>
-            <p className="text-foreground">
-              Bringing together the best flavors from Korea, Japan, China, Philippines, and India.
+            <h3 className="text-xl font-bold mb-4">Authentic Indian Food Truck</h3>
+            <p className="text-foreground text-sm">
+              Authentic Indian food truck in Long Beach. Specializing in Dosa, Parotta, Kothu Parotta, Goat Curry, Samosa Chat, and traditional street food. Premium quality, authentic recipes.
             </p>
           </div>
             <div>
@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-black/10 mt-8 pt-8 text-center text-foreground">
-          <p>&copy; {new Date().getFullYear()} Asian Fusion Food Truck. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Fast Fusion Food Truck. All rights reserved.</p>
         </div>
       </div>
     </footer>

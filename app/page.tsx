@@ -93,11 +93,11 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
-                Asian Fusion
-                <span className="block text-accent">Food Truck</span>
+                India’s True Taste
+                <span className="block text-accent"> Fresh from Our Truck</span>
               </h1>
               <p className="text-gray-700 mb-6 md:mb-8 text-base sm:text-lg">
-                Experience the perfect blend of Korean, Japanese, Chinese, Philippine, and Indian cuisines
+                Authentic Indian cuisine featuring South Indian specialties. Fresh Dosa, Parotta, Kothu Parotta, Goat Curry, and more
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button
@@ -135,13 +135,13 @@ export default function Home() {
             {[
               {
                 icon: <Utensils className="h-6 w-6 text-accent" />,
-                title: "Fusion Cuisine",
-                description: "Unique blend of Asian flavors",
+                title: "Authentic Indian",
+                description: "Traditional recipes with Dosa, Parotta, Goat Curry & more",
               },
               {
                 icon: <ShoppingBag className="h-6 w-6 text-accent" />,
-                title: "Fresh Ingredients",
-                description: "Quality ingredients for authentic taste",
+                title: "Fresh & Quality",
+                description: "Premium ingredients for authentic Indian taste",
               },
               {
                 icon: <Truck className="h-6 w-6 text-accent" />,
@@ -179,28 +179,28 @@ export default function Home() {
           >
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Popular <span className="text-primary">Dishes</span>
+                Our Signature <span className="text-primary">Dishes</span>
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto px-4">
-                Discover our most loved fusion dishes that bring together the best of Asian cuisines
+                Try our most popular Indian specialties crafted with traditional recipes
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
-                  name: "Hyderabadi Chicken Biryani",
-                  description: "Fragrant basmati rice cooked with tender chicken and aromatic spices",
-                  image: "/assets/images/chicken-biryani.jpg",
+                  name: "Kothu Parotta",
+                  description: "Shredded parotta mixed with spiced vegetables and aromatic Indian spices",
+                  image: "",
                 },
                 {
-                  name: "Chicken 65",
-                  description: "Spicy, deep-fried chicken marinated in flavorful spices",
-                  image: "/assets/images/chicken-65.jpg",
+                  name: "Goat Curry",
+                  description: "Tender goat cooked in rich, aromatic curry sauce with traditional spices",
+                  image: "/assets/images/goat-curry.jpg",
                 },
                 {
-                  name: "Garlic Shrimp Noodle",
-                  description: "Stir-fried noodles with shrimp and garlic sauce",
-                  image: "/assets/images/shrimp-noodles.jpg",
+                  name: "Samosa Chat",
+                  description: "Crispy samosa topped with spiced chickpeas, yogurt, and chutney",
+                  image: "/assets/images/chana-samosa.jpg",
                 },
               ].map((dish, index) => (
                 <motion.div
